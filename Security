@@ -1,0 +1,93 @@
+local spawner = loadstring(game:HttpGet("https://raw.githubusercontent.com/VoorPhale012/Fogroom/refs/heads/main/Furry"))()
+---====== Create entity ======---
+
+local entity = spawner.Create({
+	Entity = {
+		Name = "AmbushMoving",
+		Asset = "rbxassetid://94745850019238",
+		HeightOffset = 0.2
+	},
+	Lights = {
+		Flicker = {
+			Enabled = true,
+			Duration = 4
+		},
+		Shatter = true,
+		Repair = false
+	},
+	Earthquake = {
+		Enabled = false
+	},
+	CameraShake = {
+		Enabled = true,
+		Range = 100,
+		Values = {15.5, 20, 0.1, 1} -- Magnitude, Roughness, FadeIn, FadeOut
+	},
+	Movement = {
+		Speed = 255,
+		Delay = 6.5,
+		Reversed = false
+	},
+	Rebounding = {
+		Enabled = true,
+		Type = "Ambush",
+		Min = 3,
+		Max = 4,
+		Delay = 0.5
+	},
+	Damage = {
+		Enabled = true,
+		Range = 60,
+		Amount = 100
+	},
+	Crucifixion = {
+		Enabled = false,
+		Range = 85,
+		Resist = false,
+		Break = true
+	},
+	Death = {
+		Type = "Guiding", -- "Curious"
+		Hints = {"You died to Ambush", "You need to hide or run when he appears", "I hope you will pro", "Let’s try again."},
+		Cause = ""
+	}
+})
+
+---====== Debug entity ======---
+
+entity:SetCallback("OnSpawned", function()
+    print("Entity has spawned")
+game.Workspace.AmbushMoving.RushNew.Footsteps:Stop()
+function GitAud(soundgit,filename)
+    SoundName=tostring(SoundName)
+    local url=soundgit
+    local FileName = filename
+    writefile(FileName..".mp3", game:HttpGet(url))
+    return (getcustomasset or getsynasset)(FileName..".mp3")
+end
+
+function CustomGitSound(soundlink, vol, filename)
+    local sound = Instance.new("Sound")
+    sound.SoundId = GitAud(soundlink, filename)
+    sound.Parent = game.Workspace
+    sound.Volume = 1.5
+sound.Name = "ambience"
+sound:Play()
+end
+
+CustomGitSound("https://raw.githubusercontent.com/VoorPhale012/Eye/refs/heads/main/Audio_ambushWarning.mp3", 1, "Sound")
+wait(5)
+game.Workspace.AmbushMoving.RushNew.Footsteps:Play()
+end)
+
+entity:SetCallback("OnDamagePlayer", function(newHealth)
+	if newHealth == 0 then
+		print("Entity has killed the player")
+	else
+		print("Entity has damaged the player")
+end
+game.ReplicatedStorage.GameStats["Player_".. game.Players.LocalPlayer.Name].Total.DeathCause.Value = "AmbushMoving"
+end)
+
+---====== Run entity ======---
+entity:Run()
