@@ -4,7 +4,7 @@ local spawner = loadstring(game:HttpGet("https://raw.githubusercontent.com/VoorP
 local entity = spawner.Create({
 	Entity = {
 		Name = "AmbushMoving",
-		Asset = "rbxassetid://94745850019238",
+		Asset = "https://raw.githubusercontent.com/VoorPhale012/Ambush/refs/heads/main/fefffefe.rbxm?raw=true",
 		HeightOffset = 0.2
 	},
 	Lights = {
