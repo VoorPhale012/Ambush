@@ -1,0 +1,74 @@
+game.ReplicatedStorage.GameData.LatestRoom.Changed:Connect(function()
+            wait(3.5)
+            if workspace:FindFirstChild("SeekMovingNewClone") then
+                local vu117 = workspace:FindFirstChild("SeekMovingNewClone")
+                local vu118 = vu117:FindFirstChild("SeekRig")
+                local vu119 = game:GetObjects("rbxassetid://129459583985895")[1]
+                vu119.Name = "seek2"
+                local v120, v121, v122 = pairs(vu119.Figure:GetChildren())
+                while true do
+                    local v123
+                    v122, v123 = v120(v121, v122)
+                    if v122 == nil then
+                        break
+                    end
+                    if v123:IsA("Sound") then
+                        v123:Stop()
+                    end
+                end
+               vu118.Head.Eye:Destroy()
+                vu118.Head.Black:Destroy()
+                vu119.Parent = workspace
+                local vu124 = vu119:FindFirstChild("SeekRig")
+                local v125 = vu124
+                vu124.FindFirstChild(v125, "Root").Anchored = true
+                spawn(function()
+                    while game["Run Service"].Heartbeat:Wait() and vu117 do
+                        if vu118:FindFirstChild("Root") then
+                            local v126 = vu118
+                            vu124:FindFirstChild("Root").CFrame = v126:FindFirstChild("Root").CFrame
+                        end
+                        local v127, v128, v129 = pairs(vu117.Figure:GetChildren())
+                        while true do
+                            local v130
+                            v129, v130 = v127(v128, v129)
+                            if v129 == nil then
+                                break
+                            end
+                            vu117.Figure.Footsteps:Stop()
+                            vu117.Figure.FootstepsFar:Stop()
+                        end
+                        local v131 = vu118
+                        local v132, v133, v134 = pairs(v131:GetChildren())
+                        while true do
+                            local v135
+                            v134, v135 = v132(v133, v134)
+                            if v134 == nil then
+                                break
+                            end
+                            if v135:IsA("BasePart") then
+                                v135.Transparency = 1
+                            end
+                        end
+                    end
+                end)
+                require(game.Players.LocalPlayer.PlayerGui.MainUI.Initiator.Main_Game)
+                local v136 = vu124
+                repeat
+                    task.wait()
+                until vu117.SeekMusic.IsPlaying == true
+                warn("Playing")
+                spawn(function()
+                    wait(7)
+                    local v137 = vu119.Figure
+                    v137.FootseptsFar:Play()
+                    v137.Footsteps:Play()
+                    v137.Splashing:Play()
+                    v137["Splashing Far"]:Play()
+                end)
+                local v138 = v136.AnimationController:LoadAnimation(v136.AnimRaise)
+                v138:Play()
+                v138.Stopped:Wait()
+                v136.AnimationController:LoadAnimation(v136.AnimRun):Play()
+            end
+        end)
