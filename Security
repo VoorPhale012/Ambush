@@ -69,15 +69,19 @@ end
 function CustomGitSound(soundlink, vol, filename)
     local sound = Instance.new("Sound")
     sound.SoundId = GitAud(soundlink, filename)
-    sound.Parent = game.Workspace
+    sound.Parent = game.Workspace.AmbushMoving
     sound.Volume = 1.5
 sound.Name = "ambience"
 sound:Play()
 end
 
-CustomGitSound("https://raw.githubusercontent.com/VoorPhale012/Eye/refs/heads/main/Audio_ambushWarning.mp3", 1, "Sound")
+CustomGitSound("https://raw.githubusercontent.com/VoorPhale012/Eye/refs/heads/main/Ambienceambush.mp3", 1, "Ambush")
 wait(5)
 game.Workspace.AmbushMoving.RushNew.Footsteps:Play()
+end)
+
+entity:SetCallback("OnDespawning", function()
+    print("Entity is despawning")
 end)
 
 entity:SetCallback("OnDamagePlayer", function(newHealth)
